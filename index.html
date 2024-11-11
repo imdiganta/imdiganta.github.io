@@ -276,14 +276,36 @@
         </div>
     </section>
     <script>
+        let isDragging = false;
+        let offsetX, offsetY;
+      
+        const iframeContainer = document.getElementById('iframeContainer');
+      
         function toggleIframe() {
-          const iframeContainer = document.getElementById('iframeContainer');
           if (iframeContainer.style.display === 'none' || iframeContainer.style.display === '') {
             iframeContainer.style.display = 'block'; // Show iframe
           } else {
             iframeContainer.style.display = 'none';  // Hide iframe
           }
         }
+      
+        // Event listeners for drag functionality
+        iframeContainer.addEventListener('mousedown', (e) => {
+          isDragging = true;
+          offsetX = e.clientX - iframeContainer.getBoundingClientRect().left;
+          offsetY = e.clientY - iframeContainer.getBoundingClientRect().top;
+        });
+      
+        document.addEventListener('mousemove', (e) => {
+          if (isDragging) {
+            iframeContainer.style.left = `${e.clientX - offsetX}px`;
+            iframeContainer.style.top = `${e.clientY - offsetY}px`;
+          }
+        });
+      
+        document.addEventListener('mouseup', () => {
+          isDragging = false;
+        });
       </script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
