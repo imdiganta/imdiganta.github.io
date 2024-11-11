@@ -321,12 +321,14 @@
             iframeContainer.style.height = maximizedSize.height;
             iframeContainer.style.top = maximizedSize.top;
             iframeContainer.style.left = maximizedSize.left;
+            iframeContainer.style.borderRadius = "0px";
             isMaximized = true;
           } else {
             iframeContainer.style.width = originalSize.width;
             iframeContainer.style.height = originalSize.height;
             iframeContainer.style.bottom = '100px';
             iframeContainer.style.right = '20px';
+            iframeContainer.style.borderRadius = "10px";
             isMaximized = false;
           }
         }
