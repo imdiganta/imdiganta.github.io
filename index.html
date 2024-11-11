@@ -236,7 +236,7 @@
     </div>
   
     <!-- Draggable Iframe container -->
-    <div class="iframe-container" id="">
+    <div class="iframe-container" id="iframeContainer">
       <div class="control-btns" onclick="maximizeIframe()">
         <!-- <button class="control-btn" onclick="toggleIframe()">×</button> -->
         <!-- <button class="control-btn" onclick="maximizeIframe()">⛶</button> -->
@@ -341,27 +341,27 @@
           isMaximized = false;
         }
       
-        // Function to start drag on mouse down or touch start
-        function startDrag(e) {
-          if (!isMaximized) { // Only allow dragging if not maximized
-            isDragging = true;
-            const rect = iframeContainer.getBoundingClientRect();
-            offsetX = (e.clientX || e.touches[0].clientX) - rect.left;
-            offsetY = (e.clientY || e.touches[0].clientY) - rect.top;
-            e.preventDefault();
-          }
-        }
+        // // Function to start drag on mouse down or touch start
+        // function startDrag(e) {
+        //   if (!isMaximized) { // Only allow dragging if not maximized
+        //     isDragging = true;
+        //     const rect = iframeContainer.getBoundingClientRect();
+        //     offsetX = (e.clientX || e.touches[0].clientX) - rect.left;
+        //     offsetY = (e.clientY || e.touches[0].clientY) - rect.top;
+        //     e.preventDefault();
+        //   }
+        // }
       
-        // Function to perform dragging on mouse move or touch move
-        function performDrag(e) {
-          if (isDragging) {
-            const clientX = e.clientX || e.touches[0].clientX;
-            const clientY = e.clientY || e.touches[0].clientY;
-            iframeContainer.style.left = `${clientX - offsetX}px`;
-            iframeContainer.style.top = `${clientY - offsetY}px`;
-            e.preventDefault();
-          }
-        }
+        // // Function to perform dragging on mouse move or touch move
+        // function performDrag(e) {
+        //   if (isDragging) {
+        //     const clientX = e.clientX || e.touches[0].clientX;
+        //     const clientY = e.clientY || e.touches[0].clientY;
+        //     iframeContainer.style.left = `${clientX - offsetX}px`;
+        //     iframeContainer.style.top = `${clientY - offsetY}px`;
+        //     e.preventDefault();
+        //   }
+        // }
       
         // Function to stop drag on mouse up or touch end
         function stopDrag() {
