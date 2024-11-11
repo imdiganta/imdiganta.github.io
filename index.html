@@ -157,12 +157,13 @@
 
   /* Close, Maximize, and Minimize button styling */
   .control-btns {
-    position: absolute;
     top: 5px;
     right: 5px;
     display: flex;
     gap: 5px;
-  }
+    flex-direction: row-reverse;
+    background-color: #2966c1;
+}
 
   .control-btn {
     background-color: #555;
@@ -177,10 +178,11 @@
     font-size: 16px;
     cursor: pointer;
   }
-
-  .control-btn.close-btn { background-color: #ff4b4b; } /* Close button color */
-  .control-btn.maximize-btn { background-color: #4caf50; } /* Maximize button color */
-  .control-btn.minimize-btn { background-color: #0078ff; } /* Minimize button color */
+  
+  
+  .control-btn.close-btn { background-color: #ff4b4b00;width: 20px;padding: 0; } /* Close button color */
+  .control-btn.maximize-btn { background-color: #4caf4f00;width: 20px;padding: 0; } /* Maximize button color */
+  .control-btn.minimize-btn { background-color: #0077ff00;width: 20px;padding: 0; } /* Minimize button color */
 </style>
 <body class="xvb4b4 x6n32m9 x1nr1p0w x1ehdrup">
     <section>
