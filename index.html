@@ -104,6 +104,7 @@
     flex-wrap: wrap;
     align-content: center;
 }
+
   /* Floating action button container */
   .fab-container {
     position: fixed;
@@ -137,14 +138,16 @@
     position: fixed;
     bottom: 100px;
     right: 20px;
-    width: 350px;
-    height: 500px;
+    width: 300px;
+    height: 400px;
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
     border-radius: 10px;
     overflow: hidden;
-    display: none;
+    display: none; /* Initially hidden */
     z-index: 1000;
-}
+    cursor: move; /* Cursor indicates draggable area */
+    background: white;
+  }
 
   .iframe-container iframe {
     width: 100%;
@@ -152,12 +155,17 @@
     border: none;
   }
 
-  /* Close button styling */
-  .close-btn {
+  /* Close, Maximize, and Minimize button styling */
+  .control-btns {
     position: absolute;
     top: 5px;
     right: 5px;
-    background-color: #ff4b4b;
+    display: flex;
+    gap: 5px;
+  }
+
+  .control-btn {
+    background-color: #555;
     color: #fff;
     border: none;
     border-radius: 50%;
@@ -169,6 +177,10 @@
     font-size: 16px;
     cursor: pointer;
   }
+
+  .control-btn.close-btn { background-color: #ff4b4b; } /* Close button color */
+  .control-btn.maximize-btn { background-color: #4caf50; } /* Maximize button color */
+  .control-btn.minimize-btn { background-color: #0078ff; } /* Minimize button color */
 </style>
 <body class="xvb4b4 x6n32m9 x1nr1p0w x1ehdrup">
     <section>
@@ -217,11 +229,16 @@
     <div class="fab-container" onclick="toggleIframe()">
         <i class="fas fa-comments"></i>
     </div>
-      <!-- Iframe container -->
+  
+    <!-- Draggable Iframe container -->
     <div class="iframe-container" id="iframeContainer">
-    <button class="close-btn" onclick="toggleIframe()">×</button>
-    <iframe src="https://www.example.com"></iframe> <!-- Replace with your URL -->
-  </div>
+      <div class="control-btns">
+        <button class="control-btn close-btn" onclick="toggleIframe()">×</button>
+        <button class="control-btn maximize-btn" onclick="maximizeIframe()">⛶</button>
+        <button class="control-btn minimize-btn" onclick="minimizeIframe()">–</button>
+      </div>
+      <iframe src="https://www.example.com"></iframe> <!-- Replace with your URL -->
+    </div>
     <section class="youling">
         <div style="font-size: 10px; text-align: center; color:#728997;">Made By DigantaCreaterStudio</div>
         <div class="manue">
@@ -277,9 +294,12 @@
     </section>
     <script>
         let isDragging = false;
+        let isMaximized = false;
         let offsetX, offsetY;
       
         const iframeContainer = document.getElementById('iframeContainer');
+        const originalSize = { width: '300px', height: '400px' }; // Default size
+        const maximizedSize = { width: '100vw', height: '100vh', top: '0', left: '0' }; // Fullscreen size
       
         function toggleIframe() {
           if (iframeContainer.style.display === 'none' || iframeContainer.style.display === '') {
@@ -289,13 +309,39 @@
           }
         }
       
+        function maximizeIframe() {
+          if (!isMaximized) {
+            iframeContainer.style.width = maximizedSize.width;
+            iframeContainer.style.height = maximizedSize.height;
+            iframeContainer.style.top = maximizedSize.top;
+            iframeContainer.style.left = maximizedSize.left;
+            isMaximized = true;
+          } else {
+            iframeContainer.style.width = originalSize.width;
+            iframeContainer.style.height = originalSize.height;
+            iframeContainer.style.bottom = '100px';
+            iframeContainer.style.right = '20px';
+            isMaximized = false;
+          }
+        }
+      
+        function minimizeIframe() {
+          iframeContainer.style.width = originalSize.width;
+          iframeContainer.style.height = originalSize.height;
+          iframeContainer.style.bottom = '100px';
+          iframeContainer.style.right = '20px';
+          isMaximized = false;
+        }
+      
         // Function to start drag on mouse down or touch start
         function startDrag(e) {
-          isDragging = true;
-          const rect = iframeContainer.getBoundingClientRect();
-          offsetX = (e.clientX || e.touches[0].clientX) - rect.left;
-          offsetY = (e.clientY || e.touches[0].clientY) - rect.top;
-          e.preventDefault(); // Prevents unwanted text selection during drag
+          if (!isMaximized) { // Only allow dragging if not maximized
+            isDragging = true;
+            const rect = iframeContainer.getBoundingClientRect();
+            offsetX = (e.clientX || e.touches[0].clientX) - rect.left;
+            offsetY = (e.clientY || e.touches[0].clientY) - rect.top;
+            e.preventDefault();
+          }
         }
       
         // Function to perform dragging on mouse move or touch move
@@ -305,7 +351,7 @@
             const clientY = e.clientY || e.touches[0].clientY;
             iframeContainer.style.left = `${clientX - offsetX}px`;
             iframeContainer.style.top = `${clientY - offsetY}px`;
-            e.preventDefault(); // Prevents unwanted scrolling during drag on mobile
+            e.preventDefault();
           }
         }
       
