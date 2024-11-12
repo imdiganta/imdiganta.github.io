@@ -186,8 +186,20 @@
     border-radius: 5px;
     font-size: 16px;
 }
+.blaer-efect{
+    backdrop-filter: blur(10px);
+}
+.blaer-efect {
+    backdrop-filter: blur(10px);
+    width: 100%;
+    height: 100vh;
+    position: absolute;
+    z-index: 7;
+    display: none;
+}
 </style>
 <body class="xvb4b4 x6n32m9 x1nr1p0w x1ehdrup">
+    <div class="blaer-efect"></div>
     <section>
         <div class="profile">
             <div class="d1">
@@ -235,7 +247,6 @@
     <div class="fab-container" onclick="toggleIframe()">
         <i class="fas fa-comments"></i>
     </div>
-  
     <!-- Draggable Iframe container -->
     <div class="iframe-container" id="iframeContainer">
       <div class="control-btns" onclick="maximizeIframe()">
@@ -304,6 +315,7 @@
         let isMaximized = false;
         let offsetX, offsetY;
       
+        const blaerefect = document.getElementsByClassName('blaer-efect');
         const iframeContainer = document.getElementById('iframeContainer');
         const originalSize = { width: '300px', height: '400px' }; // Default size
         const maximizedSize = { width: '100vw', height: '100vh', top: '0', left: '0' }; // Fullscreen size
@@ -346,6 +358,7 @@
         function startDrag(e) {
           if (!isMaximized) { // Only allow dragging if not maximized
             isDragging = true;
+            blaerefect.style.display ="block"
             const rect = iframeContainer.getBoundingClientRect();
             offsetX = (e.clientX || e.touches[0].clientX) - rect.left;
             offsetY = (e.clientY || e.touches[0].clientY) - rect.top;
@@ -356,6 +369,7 @@
         // Function to perform dragging on mouse move or touch move
         function performDrag(e) {
           if (isDragging) {
+            blaerefect.style.display ="block"
             const clientX = e.clientX || e.touches[0].clientX;
             const clientY = e.clientY || e.touches[0].clientY;
             iframeContainer.style.left = `${clientX - offsetX}px`;
@@ -367,6 +381,7 @@
         // Function to stop drag on mouse up or touch end
         function stopDrag() {
           isDragging = false;
+          blaerefect.style.display ="none"
         }
       
         // Event listeners for both mouse and touch events
