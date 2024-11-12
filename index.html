@@ -449,6 +449,7 @@
         // Function to stop drag on mouse up or touch end
         function stopDrag() {
           blaerefect.style.opacity = "0"
+          setTimeout(function(){},5000); //delay is in milliseconds 
           blaerefect.style.display = "none"
           isDragging = false;
         }
