@@ -173,7 +173,8 @@
     flex-direction: row;
     background-color: #2966c1;
     flex-wrap: wrap;
-    justify-content: space-between;
+    /* justify-content: space-between; */
+    justify-content: center;
     align-items: center;
 }
 
@@ -213,11 +214,21 @@
 }
 .contaner-for-navigation {
     display: flex;
+    display: none;
 }
 p.powerd-by {
     margin: 0;
     padding: 0 10px;
     color: #ffffff73;
+    display: none;
+}
+.left-drager {
+    width: 35%;
+    height: 100%;
+}
+.right-drager {
+    width: 35%;
+    height: 100%;
 }
 @-webkit-keyframes fadeInFromNone {
     0% {
@@ -337,12 +348,14 @@ p.powerd-by {
         <i class="fas fa-comments"></i>
     </div>
     <!-- Draggable Iframe container -->
-    <div class="iframe-container" id="iframeContainer">
+    <div class="iframe-container" id="flotewindow" >
       <div class="control-btns" onclick="maximizeIframe()">
         <!-- <button class="control-btn" onclick="toggleIframe()">×</button> -->
         <!-- <button class="control-btn" onclick="maximizeIframe()">⛶</button> -->
-         <p class="powerd-by">Powerd by DIGANTA</p>
-        <button class="control-btn2">  </button>
+        <p id="iframeContainer" class="powerd-by">Powerd by DIGANTA</p>
+        <div class="right-drager" id="rightdrager"></div>
+        <button class="control-btn2"></button>
+        <div class="left-drager" id="leftdrager"></div>
          <div class="contaner-for-navigation">
              <button class="control-btn close-btn" onclick="toggleIframe()">×</button>
              <button class="control-btn maximize-btn" onclick="maximizeIframe()">⛶</button>
@@ -412,41 +425,44 @@ p.powerd-by {
       
         const blaerefect = document.getElementById('blaer-efect');
         const iframeContainer = document.getElementById('iframeContainer');
+        const flotewindow = document.getElementById('flotewindow');
+        const leftdrager = document.getElementById('leftdrager');
+        const rightdrager = document.getElementById('rightdrager');
         const originalSize = { width: '300px', height: '400px' }; // Default size
         const maximizedSize = { width: '100vw', height: '100vh', top: '0', left: '0' }; // Fullscreen size
       
         function toggleIframe() {
-          if (iframeContainer.style.display === 'none' || iframeContainer.style.display === '') {
-            iframeContainer.style.display = 'block'; // Show iframe
+          if (flotewindow.style.display === 'none' || flotewindow.style.display === '') {
+            flotewindow.style.display = 'block'; // Show iframe
           } else {
-            iframeContainer.style.display = 'none';  // Hide iframe
+            flotewindow.style.display = 'none';  // Hide iframe
           }
         }
       
         function maximizeIframe() {
           if (!isMaximized) {
-            iframeContainer.style.width = maximizedSize.width;
-            iframeContainer.style.height = maximizedSize.height;
-            iframeContainer.style.top = maximizedSize.top;
-            iframeContainer.style.left = maximizedSize.left;
-            iframeContainer.style.borderRadius = "0px";
+            flotewindow.style.width = maximizedSize.width;
+            flotewindow.style.height = maximizedSize.height;
+            flotewindow.style.top = maximizedSize.top;
+            flotewindow.style.left = maximizedSize.left;
+            flotewindow.style.borderRadius = "0px";
             isMaximized = true;
           } else {
-            iframeContainer.style.width = originalSize.width;
-            iframeContainer.style.height = originalSize.height;
-            iframeContainer.style.bottom = '100px';
-            iframeContainer.style.right = '20px';
-            iframeContainer.style.borderRadius = "10px";
+            flotewindow.style.width = originalSize.width;
+            flotewindow.style.height = originalSize.height;
+            flotewindow.style.bottom = '100px';
+            flotewindow.style.right = '20px';
+            flotewindow.style.borderRadius = "10px";
             isMaximized = false;
           }
         }
       
         function minimizeIframe() {
-          iframeContainer.style.width = originalSize.width;
-          iframeContainer.style.height = originalSize.height;
-          iframeContainer.style.bottom = '100px';
-          iframeContainer.style.right = '20px';
-          isMaximized = false;
+            flotewindow.style.width = originalSize.width;
+            flotewindow.style.height = originalSize.height;
+            flotewindow.style.bottom = '100px';
+            flotewindow.style.right = '20px';
+            isMaximized = false;
         }
       
         // Function to start drag on mouse down or touch start
@@ -455,7 +471,7 @@ p.powerd-by {
             blaerefect.style.opacity = "1"
           if (!isMaximized) { // Only allow dragging if not maximized
             isDragging = true;
-            const rect = iframeContainer.getBoundingClientRect();
+            const rect = flotewindow.getBoundingClientRect();
             offsetX = (e.clientX || e.touches[0].clientX) - rect.left;
             offsetY = (e.clientY || e.touches[0].clientY) - rect.top;
             e.preventDefault();
@@ -467,8 +483,8 @@ p.powerd-by {
           if (isDragging) {
             const clientX = e.clientX || e.touches[0].clientX;
             const clientY = e.clientY || e.touches[0].clientY;
-            iframeContainer.style.left = `${clientX - offsetX}px`;
-            iframeContainer.style.top = `${clientY - offsetY}px`;
+            flotewindow.style.left = `${clientX - offsetX}px`;
+            flotewindow.style.top = `${clientY - offsetY}px`;
             e.preventDefault();
           }
         }
@@ -482,11 +498,13 @@ p.powerd-by {
         }
       
         // Event listeners for both mouse and touch events
-        iframeContainer.addEventListener('mousedown', startDrag);
+        leftdrager.addEventListener('mousedown', startDrag);
+        rightdrager.addEventListener('mousedown', startDrag);
         document.addEventListener('mousemove', performDrag);
         document.addEventListener('mouseup', stopDrag);
       
-        iframeContainer.addEventListener('touchstart', startDrag);
+        leftdrager.addEventListener('touchstart', startDrag);
+        rightdrager.addEventListener('touchstart', startDrag);
         document.addEventListener('touchmove', performDrag);
         document.addEventListener('touchend', stopDrag);
       </script>
