@@ -354,7 +354,7 @@ p.powerd-by {
         <!-- <button class="control-btn" onclick="maximizeIframe()">⛶</button> -->
         <p id="iframeContainer" class="powerd-by">Powerd by DIGANTA</p>
         <div class="right-drager" id="rightdrager"></div>
-        <button class="control-btn2"></button>
+        <button class="control-btn2" id="androidnavigationbutton"></button>
         <div class="left-drager" id="leftdrager"></div>
          <div class="contaner-for-navigation">
              <button class="control-btn close-btn" onclick="toggleIframe()">×</button>
@@ -428,6 +428,7 @@ p.powerd-by {
         const flotewindow = document.getElementById('flotewindow');
         const leftdrager = document.getElementById('leftdrager');
         const rightdrager = document.getElementById('rightdrager');
+        const androidnavigationbutton = document.getElementById('androidnavigationbutton');
         const originalSize = { width: '300px', height: '400px' }; // Default size
         const maximizedSize = { width: '100vw', height: '100vh', top: '0', left: '0' }; // Fullscreen size
       
@@ -496,6 +497,11 @@ p.powerd-by {
           blaerefect.style.display = "none"
           isDragging = false;
         }
+
+        androidnavigationbutton.addEventListener("dblclick", (event) => {
+            console.log("Double-click detected!");
+            console.log("Event details:", event);
+        });
       
         // Event listeners for both mouse and touch events
         leftdrager.addEventListener('mousedown', startDrag);
