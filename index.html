@@ -193,6 +193,77 @@
     position: absolute;
     display: none;
     z-index: 3;
+    -webkit-animation: fadeInFromNone 0.5s ease-out;
+    -moz-animation: fadeInFromNone 0.5s ease-out;
+    -o-animation: fadeInFromNone 0.5s ease-out;
+    animation: fadeInFromNone 0.5s ease-out;
+}
+@-webkit-keyframes fadeInFromNone {
+    0% {
+        display: none;
+        opacity: 0;
+    }
+
+    1% {
+        display: block;
+        opacity: 0;
+    }
+
+    100% {
+        display: block;
+        opacity: 1;
+    }
+}
+
+@-moz-keyframes fadeInFromNone {
+    0% {
+        display: none;
+        opacity: 0;
+    }
+
+    1% {
+        display: block;
+        opacity: 0;
+    }
+
+    100% {
+        display: block;
+        opacity: 1;
+    }
+}
+
+@-o-keyframes fadeInFromNone {
+    0% {
+        display: none;
+        opacity: 0;
+    }
+
+    1% {
+        display: block;
+        opacity: 0;
+    }
+
+    100% {
+        display: block;
+        opacity: 1;
+    }
+}
+
+@keyframes fadeInFromNone {
+    0% {
+        display: none;
+        opacity: 0;
+    }
+
+    1% {
+        display: block;
+        opacity: 0;
+    }
+
+    100% {
+        display: block;
+        opacity: 1;
+    }
 }
 </style>
 <body class="xvb4b4 x6n32m9 x1nr1p0w x1ehdrup">
@@ -354,6 +425,7 @@
         // Function to start drag on mouse down or touch start
         function startDrag(e) {
             blaerefect.style.display = "block"
+            blaerefect.style.opacity = "1"
           if (!isMaximized) { // Only allow dragging if not maximized
             isDragging = true;
             const rect = iframeContainer.getBoundingClientRect();
@@ -377,6 +449,7 @@
         // Function to stop drag on mouse up or touch end
         function stopDrag() {
           blaerefect.style.display = "none"
+          blaerefect.style.opacity = "1"
           isDragging = false;
         }
       
