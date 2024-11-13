@@ -1,20 +1,17 @@
 <head>
-    <style>
-        :root {
-            --theme-color: #FFFFFF;
-        }
-        
-        body {
-            background-color: var(--theme-color);
-        }
-    </style>
+    <meta name="theme-color" content="#FFFFFF">
 </head>
 <body>
     <button onclick="setThemeColor('#FF5733')">Set Theme Color to Orange</button>
 
     <script>
         function setThemeColor(color) {
-            document.documentElement.style.setProperty('--theme-color', color);
+            let metaThemeColor = document.querySelector("meta[name=theme-color]");
+            if (metaThemeColor) {
+                metaThemeColor.setAttribute("content", color);
+                // Reload the page to enforce the change
+                location.reload();
+            }
         }
     </script>
 </body>
