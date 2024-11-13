@@ -455,14 +455,25 @@ p.powerd-by {
                     // Place double-tap functionality here
                 } else if (tapCount === 2) {
                     // Triple-tap detected
+                    if (androidnavigationbutton.style.display === 'none' || androidnavigationbutton.style.display === '') {
+                        navigationcomputer.style.display = "none";
+                        androidnavigationbutton.style.display = "block";
+                        iframeContainer.style.display = "none";
+                        iframeContainer.style.width = "auto";
+                        leftdrager.style.display = "block";
+                        rightdrager.style.display = "block";
+                        conteinesblock.style.justifyContent ="space-between"
+                    } else {
+                        navigationcomputer.style.display = "flex";
+                        androidnavigationbutton.style.display = "none";
+                        iframeContainer.style.display = "block";
+                        iframeContainer.style.width = "70%";
+                        leftdrager.style.display = "none";
+                        rightdrager.style.display = "none";
+                        conteinesblock.style.justifyContent ="space-between"
+                    }
                     console.log("Triple-tap detected!");
-                    navigationcomputer.style.display = "flex";
-                    androidnavigationbutton.style.display = "none";
-                    iframeContainer.style.display = "block";
-                    iframeContainer.style.width = "70%";
-                    leftdrager.style.display = "none";
-                    rightdrager.style.display = "none";
-                    conteinesblock.style.justifyContent ="space-between"
+
                     // Place triple-tap functionality here
                 }else if (tapCount === 3) {
                     // Triple-tap detected
