@@ -344,7 +344,7 @@ p.powerd-by {
         <a class="uling" href="pages/github.html"><div class="socl"><img src="60/github.png" alt="">Github</div></a>
     </section>
     <!-- Floating action button with chat icon -->
-    <div class="fab-container" onclick="toggleIframe()">
+    <div class="fab-container" id="fabiconblock" onclick="toggleIframe()">
         <i class="fas fa-comments"></i>
     </div>
     <!-- Draggable Iframe container -->
@@ -497,33 +497,32 @@ p.powerd-by {
           blaerefect.style.display = "none"
           isDragging = false;
         }
-        let lastTap = 0;
+        let tapCount = 0;
+        let tapTimeout;
 
-        leftdrager.addEventListener("touchstart", (event) => {
-            const currentTime = new Date().getTime();
-            const tapLength = currentTime - lastTap;
-        
-            // Check if the time between taps is short enough to be considered a double-tap
-            if (tapLength < 300 && tapLength > 0) {
-                // Handle double-tap here
-                console.log("Double-tap detected!");
-                event.preventDefault(); // Prevent default action (like zooming)
+        const element = document.getElementById("fabiconblock");
+
+        element.addEventListener("touchstart", (event) => {
+            tapCount++;
+
+            if (tapTimeout) {
+                clearTimeout(tapTimeout);
             }
-        
-            lastTap = currentTime;
-        });
-        rightdrager.addEventListener("touchstart", (event) => {
-            const currentTime = new Date().getTime();
-            const tapLength = currentTime - lastTap;
-        
-            // Check if the time between taps is short enough to be considered a double-tap
-            if (tapLength < 300 && tapLength > 0) {
-                // Handle double-tap here
-                console.log("Double-tap detected!");
-                event.preventDefault(); // Prevent default action (like zooming)
-            }
-        
-            lastTap = currentTime;
+
+            tapTimeout = setTimeout(() => {
+                if (tapCount === 2) {
+                    // Double-tap detected
+                    console.log("Double-tap detected!");
+                    // Place double-tap functionality here
+                } else if (tapCount === 3) {
+                    // Triple-tap detected
+                    console.log("Triple-tap detected!");
+                    // Place triple-tap functionality here
+                }
+
+                // Reset tap count
+                tapCount = 0;
+            }, 300); // 300 ms interval to detect rapid taps
         });
       
         // Event listeners for both mouse and touch events

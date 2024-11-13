@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Double-Tap and Triple-Tap Detection</title>
+    <style>
+        /* Basic styling for the tappable element */
+        #myElement {
+            width: 200px;
+            height: 200px;
+            background-color: lightblue;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            color: #333;
+            border-radius: 10px;
+            margin: 50px auto;
+            text-align: center;
+            user-select: none; /* Prevents selection highlight */
+        }
+    </style>
+</head>
+<body>
+
+    <div id="myElement">Tap Me</div>
+
+    <script>
+        let tapCount = 0;
+        let tapTimeout;
+
+        const element = document.getElementById("myElement");
+
+        element.addEventListener("touchstart", (event) => {
+            tapCount++;
+            
+            if (tapTimeout) {
+                clearTimeout(tapTimeout);
+            }
+            
+            // Set a timeout to check for the number of taps
+            tapTimeout = setTimeout(() => {
+                if (tapCount === 2) {
+                    // Double-tap detected
+                    console.log("Double-tap detected!");
+                    element.style.backgroundColor = "lightgreen";
+                    element.textContent = "Double-tap!";
+                } else if (tapCount === 3) {
+                    // Triple-tap detected
+                    console.log("Triple-tap detected!");
+                    element.style.backgroundColor = "lightcoral";
+                    element.textContent = "Triple-tap!";
+                }
+                
+                // Reset tap count and content after a short delay
+                setTimeout(() => {
+                    element.style.backgroundColor = "lightblue";
+                    element.textContent = "Tap Me";
+                }, 1000); // 1 second reset delay
+
+                tapCount = 0; // Reset tap count after checking
+            }, 300); // 300 ms interval to detect rapid taps
+        });
+    </script>
+
+</body>
+</html>
