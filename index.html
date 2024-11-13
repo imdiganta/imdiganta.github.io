@@ -419,9 +419,10 @@ p.powerd-by {
         </div>
     </section>
     <script>
+        let tapCount = 0;
         let isDragging = false;
         let isMaximized = false;
-        let offsetX, offsetY;
+        let offsetX, offsetY,tapTimeout;
       
         const blaerefect = document.getElementById('blaer-efect');
         const iframeContainer = document.getElementById('iframeContainer');
@@ -434,11 +435,37 @@ p.powerd-by {
         const maximizedSize = { width: '100vw', height: '100vh', top: '0', left: '0' }; // Fullscreen size
       
         function toggleIframe() {
-          if (flotewindow.style.display === 'none' || flotewindow.style.display === '') {
-            flotewindow.style.display = 'block'; // Show iframe
-          } else {
-            flotewindow.style.display = 'none';  // Hide iframe
-          }
+            tapCount++;
+
+            if (tapTimeout) {
+                clearTimeout(tapTimeout);
+            }
+
+            tapTimeout = setTimeout(() => {
+                if (tapCount === 1) {
+                    // Double-tap detected
+                    console.log("Double-tap detected!");
+                    if (flotewindow.style.display === 'none' || flotewindow.style.display === '') {
+                      flotewindow.style.display = 'block'; // Show iframe
+                    } else {
+                      flotewindow.style.display = 'none';  // Hide iframe
+                    }
+                    // Place double-tap functionality here
+                } else if (tapCount === 2) {
+                    // Triple-tap detected
+                    console.log("Triple-tap detected!");
+                    navigationcomputer.style.display = "flex";
+                    // Place triple-tap functionality here
+                }else if (tapCount === 3) {
+                    // Triple-tap detected
+                    console.log("Triple-tap detected!");
+                    navigationcomputer.style.display = "flex";
+                    // Place triple-tap functionality here
+                }
+            
+                // Reset tap count
+                tapCount = 0;
+            }, 300); // 300 ms interval to detect rapid taps
         }
       
         function maximizeIframe() {
@@ -498,34 +525,12 @@ p.powerd-by {
           blaerefect.style.display = "none"
           isDragging = false;
         }
-        let tapCount = 0;
-        let tapTimeout;
 
-        const element = document.getElementById("fabiconblock");
+        // const element = document.getElementById("fabiconblock");
 
-        element.addEventListener("touchstart", (event) => {
-            tapCount++;
+        // element.addEventListener("touchstart", (event) => {
 
-            if (tapTimeout) {
-                clearTimeout(tapTimeout);
-            }
-
-            tapTimeout = setTimeout(() => {
-                if (tapCount === 2) {
-                    // Double-tap detected
-                    console.log("Double-tap detected!");
-                    // Place double-tap functionality here
-                } else if (tapCount === 3) {
-                    // Triple-tap detected
-                    console.log("Triple-tap detected!");
-                    navigationcomputer.style.display = "flex";
-                    // Place triple-tap functionality here
-                }
-
-                // Reset tap count
-                tapCount = 0;
-            }, 300); // 300 ms interval to detect rapid taps
-        });
+        // });
       
         // Event listeners for both mouse and touch events
         leftdrager.addEventListener('mousedown', startDrag);
