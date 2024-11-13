@@ -213,7 +213,7 @@
     animation: fadeInFromNone 0.5s ease-out;
 }
 .contaner-for-navigation {
-    display: flex;
+    /* display: flex; */
     display: none;
 }
 p.powerd-by {
@@ -513,11 +513,12 @@ p.powerd-by {
             tapTimeout = setTimeout(() => {
                 if (tapCount === 2) {
                     // Double-tap detected
-                    navigationcomputer.style.display = "block";
+                    console.log("Double-tap detected!");
                     // Place double-tap functionality here
                 } else if (tapCount === 3) {
                     // Triple-tap detected
                     console.log("Triple-tap detected!");
+                    navigationcomputer.style.display = "flex";
                     // Place triple-tap functionality here
                 }
 
