@@ -497,14 +497,33 @@ p.powerd-by {
           blaerefect.style.display = "none"
           isDragging = false;
         }
+        let lastTap = 0;
 
-        leftdrager.addEventListener("dblclick", (event) => {
-            console.log("Double-click detected!");
-            console.log("Event details:", event);
+        leftdrager.addEventListener("touchstart", (event) => {
+            const currentTime = new Date().getTime();
+            const tapLength = currentTime - lastTap;
+        
+            // Check if the time between taps is short enough to be considered a double-tap
+            if (tapLength < 300 && tapLength > 0) {
+                // Handle double-tap here
+                console.log("Double-tap detected!");
+                event.preventDefault(); // Prevent default action (like zooming)
+            }
+        
+            lastTap = currentTime;
         });
-        rightdrager.addEventListener("dblclick", (event) => {
-            console.log("Double-click detected!");
-            console.log("Event details:", event);
+        rightdrager.addEventListener("touchstart", (event) => {
+            const currentTime = new Date().getTime();
+            const tapLength = currentTime - lastTap;
+        
+            // Check if the time between taps is short enough to be considered a double-tap
+            if (tapLength < 300 && tapLength > 0) {
+                // Handle double-tap here
+                console.log("Double-tap detected!");
+                event.preventDefault(); // Prevent default action (like zooming)
+            }
+        
+            lastTap = currentTime;
         });
       
         // Event listeners for both mouse and touch events
