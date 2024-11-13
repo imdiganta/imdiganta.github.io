@@ -215,6 +215,7 @@
 .contaner-for-navigation {
     /* display: flex; */
     display: none;
+    flex-direction: row-reverse;
 }
 p.powerd-by {
     margin: 0;
@@ -349,7 +350,7 @@ p.powerd-by {
     </div>
     <!-- Draggable Iframe container -->
     <div class="iframe-container" id="flotewindow" >
-      <div class="control-btns">
+      <div class="control-btns" id="conteinesblock">
         <!-- <button class="control-btn" onclick="toggleIframe()">×</button> -->
         <!-- <button class="control-btn" onclick="maximizeIframe()">⛶</button> -->
         <p id="iframeContainer" class="powerd-by">Powerd by DIGANTA</p>
@@ -431,6 +432,7 @@ p.powerd-by {
         const rightdrager = document.getElementById('rightdrager');
         const androidnavigationbutton = document.getElementById('androidnavigationbutton');
         const navigationcomputer = document.getElementById('navigationcomputer');
+        const conteinesblock = document.getElementById('conteinesblock');
         const originalSize = { width: '300px', height: '400px' }; // Default size
         const maximizedSize = { width: '100vw', height: '100vh', top: '0', left: '0' }; // Fullscreen size
       
@@ -457,8 +459,10 @@ p.powerd-by {
                     navigationcomputer.style.display = "flex";
                     androidnavigationbutton.style.display = "none";
                     iframeContainer.style.display = "block";
+                    iframeContainer.style.width = "70%";
                     leftdrager.style.display = "none";
-                    // rightdrager.style.display = "none";
+                    rightdrager.style.display = "none";
+                    conteinesblock.style.justifyContent ="space-between"
                     // Place triple-tap functionality here
                 }else if (tapCount === 3) {
                     // Triple-tap detected
