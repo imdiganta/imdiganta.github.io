@@ -498,7 +498,11 @@ p.powerd-by {
           isDragging = false;
         }
 
-        androidnavigationbutton.addEventListener("dblclick", (event) => {
+        leftdrager.addEventListener("dblclick", (event) => {
+            console.log("Double-click detected!");
+            console.log("Event details:", event);
+        });
+        rightdrager.addEventListener("dblclick", (event) => {
             console.log("Double-click detected!");
             console.log("Event details:", event);
         });
