@@ -356,7 +356,7 @@ p.powerd-by {
         <div class="right-drager" id="rightdrager"></div>
         <button class="control-btn2" id="androidnavigationbutton" onclick="maximizeIframe()"></button>
         <div class="left-drager" id="leftdrager"></div>
-         <div class="contaner-for-navigation">
+         <div class="contaner-for-navigation" id="navigationcomputer">
              <button class="control-btn close-btn" onclick="toggleIframe()">×</button>
              <button class="control-btn maximize-btn" onclick="maximizeIframe()">⛶</button>
              <button class="control-btn minimize-btn" onclick="minimizeIframe()">–</button>
@@ -429,6 +429,7 @@ p.powerd-by {
         const leftdrager = document.getElementById('leftdrager');
         const rightdrager = document.getElementById('rightdrager');
         const androidnavigationbutton = document.getElementById('androidnavigationbutton');
+        const navigationcomputer = document.getElementById('navigationcomputer');
         const originalSize = { width: '300px', height: '400px' }; // Default size
         const maximizedSize = { width: '100vw', height: '100vh', top: '0', left: '0' }; // Fullscreen size
       
@@ -512,7 +513,7 @@ p.powerd-by {
             tapTimeout = setTimeout(() => {
                 if (tapCount === 2) {
                     // Double-tap detected
-                    console.log("Double-tap detected!");
+                    navigationcomputer.style.display = "block";
                     // Place double-tap functionality here
                 } else if (tapCount === 3) {
                     // Triple-tap detected
