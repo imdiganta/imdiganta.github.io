@@ -550,6 +550,15 @@ p.powerd-by {
           blaerefect.style.display = "none"
           isDragging = false;
         }
+        function setThemeColor(color) {
+            const metaThemeColor = document.querySelector("meta[name=theme-color]");
+            if (metaThemeColor) {
+                metaThemeColor.setAttribute("content", color);
+            }
+        }
+
+        // Example usage: change the theme color to blue
+        setThemeColor("#2966c1");
 
         // const element = document.getElementById("fabiconblock");
 
