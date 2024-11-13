@@ -1,17 +1,27 @@
 <head>
-    <meta name="theme-color" content="#FFFFFF">
-</head>
-<body>
-    <button onclick="setThemeColor('#FF5733')">Set Theme Color to Orange</button>
-
     <script>
+        // Set the theme color immediately on page load
+        document.addEventListener("DOMContentLoaded", function() {
+            let metaThemeColor = document.createElement("meta");
+            metaThemeColor.name = "theme-color";
+            metaThemeColor.content = "#FFFFFF"; // Default color
+            document.head.appendChild(metaThemeColor);
+        });
+
+        // Function to change the theme color dynamically
         function setThemeColor(color) {
             let metaThemeColor = document.querySelector("meta[name=theme-color]");
             if (metaThemeColor) {
                 metaThemeColor.setAttribute("content", color);
-                // Reload the page to enforce the change
-                location.reload();
+            } else {
+                metaThemeColor = document.createElement("meta");
+                metaThemeColor.name = "theme-color";
+                metaThemeColor.content = color;
+                document.head.appendChild(metaThemeColor);
             }
         }
     </script>
+</head>
+<body>
+    <button onclick="setThemeColor('#FF5733')">Set Theme Color to Orange</button>
 </body>
